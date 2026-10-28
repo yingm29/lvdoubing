@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>短剧投放系统（测试环境）</title>
+  <!-- Element Plus 的样式文件（CDN 引入，无需下载） -->
+  <link rel="stylesheet" href="https://unpkg.com/element-plus@2.9.1/dist/index.css" />
+  <!-- 我们自己写的样式文件 -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ============ 页面骨架：顶栏 + 左侧菜单 + 主内容区 ============ -->
+  <div id="app" v-cloak>
+
+    <!-- 顶部栏 -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="logo-mark">剧</span>
+        <span class="sys-name">短剧投放系统</span>
+        <span class="sys-badge">New</span>
+        <span class="env-badge">测试环境 · 数据为模拟</span>
+      </div>
+      <div class="topbar-right">
+        <span class="clock">{{ clock }}</span>
+        <el-dropdown @command="onUserCommand">
+          <span class="user-chip">
+            <span class="avatar">{{ user.name[0] }}</span>
+            {{ user.name }}
+          </span>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item command="reset">重置演示数据</el-dropdown-item>
+              <el-dropdown-item divided command="logout">退出登录</el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
+      </div>
+    </header>
+
+    <!-- 主体：左侧菜单 + 右侧内容 -->
+    <div class="layout">
+      <aside class="sidebar" :class="{ collapsed: collapsed }">
+        <el-menu
+          class="side-menu"
+          :default-active="activeMenu"
+          :collapse="collapsed"
+          :collapse-transition="false"
+          @select="onMenuSelect"
+        >
+          <template v-for="menu in menus" :key="menu.title">
+            <el-sub-menu v-if="menu.children" :index="'g-' + menu.title">
+              <template #title>{{ menu.title }}</template>
+              <el-menu-item
+                v-for="item in menu.children"
+                :key="item.index"
+                :index="item.index"
+              >{{ item.title }}</el-menu-item>
+            </el-sub-menu>
+            <el-menu-item v-else :index="menu.index">{{ menu.title }}</el-menu-item>
+          </template>
+        </el-menu>
+        <div class="collapse-btn" @click="collapsed = !collapsed">
+          {{ collapsed ? '»' : '« 收起菜单' }}
+        </div>
+      </aside>
+
+      <main class="main">
+        <el-breadcrumb separator="/" class="crumb">
+          <el-breadcrumb-item v-for="(c, i) in current.crumbs" :key="i">
+            {{ c }}
+          </el-breadcrumb-item>
+        </el-breadcrumb>
+        <!-- 当前页面组件：自动任务页 或 占位页 -->
+        <component :is="current.page" :title="current.title"></component>
+      </main>
+    </div>
+  </div>
+
+  <!-- ============ 第三方库（全部走 CDN，无需安装任何东西） ============ -->
+  <script src="https://unpkg.com/vue@3.5.13/dist/vue.global.prod.js"></script>
+  <script src="https://unpkg.com/element-plus@2.9.1/dist/index.full.min.js"></script>
+  <script src="https://unpkg.com/element-plus@2.9.1/dist/locale/zh-cn.min.js"></script>
+
+  <!-- ============ 业务代码（按顺序加载） ============ -->
+  <script src="mock.js"></script>       <!-- 第 1 层：模拟后端数据 -->
+  <script src="auto-task.js"></script>  <!-- 第 2 层：自动任务页面组件 -->
+  <script src="app.js"></script>       <!-- 第 3 层：启动整个应用 -->
+</body>
+</html>
