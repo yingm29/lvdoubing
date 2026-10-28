@@ -1,0 +1,193 @@
+/* ============================================================
+   短剧投放系统（测试环境） - 全局样式
+   只负责骨架布局：顶栏、侧栏、主内容区
+   表格 / 弹窗 / 按钮等组件样式由 Element Plus 自带
+   ============================================================ */
+
+/* 防止 Vue 初始化前页面闪现原始花括号 */
+[v-cloak] { display: none; }
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+  background: #f5f7fa;
+  color: #303133;
+}
+
+/* ---------------- 顶部栏 ---------------- */
+.topbar {
+  height: 56px;
+  background: #1d2b3a;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+}
+
+.topbar-left { display: flex; align-items: center; gap: 10px; }
+
+.logo-mark {
+  width: 30px; height: 30px;
+  background: #409eff;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 16px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.sys-name { font-size: 16px; font-weight: 600; letter-spacing: 1px; }
+
+.sys-badge {
+  background: #e24b4b;
+  color: #fff;
+  font-size: 11px;
+  padding: 1px 7px;
+  border-radius: 8px;
+}
+
+.env-badge {
+  background: rgba(255, 255, 255, 0.15);
+  color: #c0c8d4;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.topbar-right { display: flex; align-items: center; gap: 18px; }
+
+.clock { font-size: 13px; color: #c0c8d4; font-variant-numeric: tabular-nums; }
+
+.user-chip {
+  display: flex; align-items: center; gap: 8px;
+  color: #fff; font-size: 13px; cursor: pointer;
+  outline: none;
+}
+
+.avatar {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: #409eff;
+  color: #fff;
+  font-size: 13px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ---------------- 主体布局 ---------------- */
+.layout {
+  display: flex;
+  padding-top: 56px;          /* 给固定定位的顶栏让位 */
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 200px;
+  background: #fff;
+  border-right: 1px solid #e4e7ed;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.2s;
+  position: fixed;
+  top: 56px; bottom: 0; left: 0;
+  z-index: 90;
+}
+
+.sidebar.collapsed { width: 64px; }
+
+.side-menu { border-right: none; flex: 1; overflow-y: auto; overflow-x: hidden; }
+
+.collapse-btn {
+  border-top: 1px solid #e4e7ed;
+  padding: 12px 0;
+  text-align: center;
+  font-size: 12px;
+  color: #909399;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.collapse-btn:hover { color: #409eff; }
+
+/* ---------------- 主内容区 ---------------- */
+.main {
+  flex: 1;
+  margin-left: 200px;         /* 给固定定位的侧栏让位 */
+  padding: 16px 20px 32px;
+  transition: margin-left 0.2s;
+  min-width: 0;               /* 让表格可以正常横向滚动 */
+}
+
+.sidebar.collapsed ~ .main { margin-left: 64px; }
+
+.crumb { margin-bottom: 14px; }
+
+/* ---------------- 自动任务页面 ---------------- */
+.auto-task-page { background: transparent; }
+
+/* 表格字体小一号，保证时间列一行显示完 */
+.auto-task-page .el-table { font-size: 12px; }
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.filters { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+
+.bulk-bar {
+  background: #ecf5ff;
+  border: 1px solid #d9ecff;
+  color: #409eff;
+  border-radius: 4px;
+  padding: 8px 14px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pager { margin-top: 14px; display: flex; justify-content: flex-end; }
+
+/* 建设中的占位内容 */
+.coming {
+  padding: 48px 0;
+  text-align: center;
+  color: #909399;
+  font-size: 13px;
+  line-height: 2;
+}
+
+/* ---------------- 通用占位页 ---------------- */
+.placeholder {
+  background: #fff;
+  border-radius: 8px;
+  padding: 72px 24px;
+  text-align: center;
+}
+
+.ph-icon {
+  width: 64px; height: 64px;
+  margin: 0 auto 18px;
+  border-radius: 16px;
+  background: #ecf5ff;
+  color: #409eff;
+  font-size: 26px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.ph-title { font-size: 16px; font-weight: 600; margin-bottom: 10px; }
+
+.ph-desc { color: #909399; font-size: 13px; line-height: 2; }
