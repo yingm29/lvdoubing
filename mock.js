@@ -16,25 +16,25 @@
   var LOG_KEY = 'skad_demo_logs_v1';
 
   // 当前登录用户（演示用，写死的）
-  var CURRENT_USER = { name: '娜可' };
+  var CURRENT_USER = { name: '李白' };
 
   /* ---------- 2. 初始演示数据（第一次打开页面时自动种入） ---------- */
 
   var SEED_TASKS = [
-    { id: 8, name: '1027-新剧全量铺投',   dramaCount: 6, intervalMin: 10, promoMode: '混合投放', roi: 1.10, dailyBudget: 200000,  status: 'on',  creator: '娜可', createdAt: '2026-10-27 09:12:35', updater: '娜可', updatedAt: '2026-10-27 15:04:22' },
+    { id: 8, name: '1027-新剧全量铺投',   dramaCount: 6, intervalMin: 10, promoMode: '混合投放', roi: 1.10, dailyBudget: 200000,  status: 'on',  creator: '李白', createdAt: '2026-10-27 09:12:35', updater: '李白', updatedAt: '2026-10-27 15:04:22' },
     { id: 7, name: '恋爱糖分-真人引流',   dramaCount: 3, intervalMin: 10, promoMode: '混合投放', roi: 1.10, dailyBudget: 9999999, status: 'on',  creator: '林一', createdAt: '2026-10-26 14:20:08', updater: '林一', updatedAt: '2026-10-27 11:40:19' },
     { id: 6, name: '豪门千金的逆袭-强制', dramaCount: 2, intervalMin: 15, promoMode: '混合投放', roi: 1.08, dailyBudget: 500000,  status: 'off', creator: '陈默', createdAt: '2026-10-25 10:05:44', updater: '陈默', updatedAt: '2026-10-26 09:31:02' },
-    { id: 5, name: '九九剧场-封心葬爱',   dramaCount: 4, intervalMin: 10, promoMode: '混合投放', roi: 1.12, dailyBudget: 920655,  status: 'on',  creator: '林一', createdAt: '2026-10-24 16:44:31', updater: '娜可', updatedAt: '2026-10-27 10:22:47' },
-    { id: 4, name: '王爷别来无恙-测试',   dramaCount: 1, intervalMin: 20, promoMode: '标准投放', roi: 1.05, dailyBudget: 100000,  status: 'off', creator: '娜可', createdAt: '2026-10-23 11:30:15', updater: '娜可', updatedAt: '2026-10-23 18:02:39' },
+    { id: 5, name: '九九剧场-封心葬爱',   dramaCount: 4, intervalMin: 10, promoMode: '混合投放', roi: 1.12, dailyBudget: 920655,  status: 'on',  creator: '林一', createdAt: '2026-10-24 16:44:31', updater: '李白', updatedAt: '2026-10-27 10:22:47' },
+    { id: 4, name: '王爷别来无恙-测试',   dramaCount: 1, intervalMin: 20, promoMode: '标准投放', roi: 1.05, dailyBudget: 100000,  status: 'off', creator: '李白', createdAt: '2026-10-23 11:30:15', updater: '李白', updatedAt: '2026-10-23 18:02:39' },
     { id: 3, name: '闪婚老伴是豪门',      dramaCount: 2, intervalMin: 10, promoMode: '混合投放', roi: 1.10, dailyBudget: 300000,  status: 'on',  creator: '陈默', createdAt: '2026-10-22 09:55:27', updater: '陈默', updatedAt: '2026-10-25 14:11:58' },
     { id: 2, name: '任务模板-备份用',     dramaCount: 1, intervalMin: 30, promoMode: '极速投放', roi: 1.00, dailyBudget: 50000,   status: 'off', creator: '林一', createdAt: '2026-10-21 15:30:00', updater: '林一', updatedAt: '2026-10-21 15:30:00' },
-    { id: 1, name: '初始化演示任务',      dramaCount: 1, intervalMin: 60, promoMode: '混合投放', roi: 1.00, dailyBudget: 10000,   status: 'on',  creator: '娜可', createdAt: '2026-10-20 10:00:00', updater: '娜可', updatedAt: '2026-10-20 10:00:00' }
+    { id: 1, name: '初始化演示任务',      dramaCount: 1, intervalMin: 60, promoMode: '混合投放', roi: 1.00, dailyBudget: 10000,   status: 'on',  creator: '李白', createdAt: '2026-10-20 10:00:00', updater: '李白', updatedAt: '2026-10-20 10:00:00' }
   ];
 
   var SEED_LOGS = [
-    { time: '2026-10-27 15:04:22', taskId: 8, taskName: '1027-新剧全量铺投',   action: '编辑任务', operator: '娜可', detail: '全局 ROI 系数调整为 1.10' },
+    { time: '2026-10-27 15:04:22', taskId: 8, taskName: '1027-新剧全量铺投',   action: '编辑任务', operator: '李白', detail: '全局 ROI 系数调整为 1.10' },
     { time: '2026-10-27 11:40:19', taskId: 7, taskName: '恋爱糖分-真人引流',   action: '开启任务', operator: '林一', detail: '任务开启，开始按 10 分钟间隔执行' },
-    { time: '2026-10-27 10:22:47', taskId: 5, taskName: '九九剧场-封心葬爱',   action: '编辑任务', operator: '娜可', detail: '日预算调整为 920,655 元' },
+    { time: '2026-10-27 10:22:47', taskId: 5, taskName: '九九剧场-封心葬爱',   action: '编辑任务', operator: '李白', detail: '日预算调整为 920,655 元' },
     { time: '2026-10-26 09:31:02', taskId: 6, taskName: '豪门千金的逆袭-强制', action: '停用任务', operator: '陈默', detail: '手动停用任务' },
     { time: '2026-10-25 14:11:58', taskId: 3, taskName: '闪婚老伴是豪门',      action: '复制任务', operator: '陈默', detail: '由「闪婚老伴是豪门」复制创建' },
     { time: '2026-10-24 16:44:31', taskId: 5, taskName: '九九剧场-封心葬爱',   action: '创建任务', operator: '林一', detail: '创建任务模板，ROI 系数 1.12' }
